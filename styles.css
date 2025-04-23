@@ -8,8 +8,8 @@ html {
     padding: 0;
     box-sizing: border-box;
 }
-
 body {
+    /* Existing body styles */
     font-family: 'Arial', sans-serif;
     color: #FFFFFF;
     line-height: 1.6;
@@ -20,9 +20,17 @@ body {
     background-size: 400% 400%;
     animation: staticFade 20s ease infinite;
     position: relative;
-}
-
-body::before {
+  
+    /* New background image styles */
+    background-image: url('assets/background.jpg'); /* Replace with your image path */
+    background-size: cover; /* Cover the entire viewport */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent image from repeating */
+    background-attachment: fixed; /* Keep the background fixed during scroll */
+  }
+  
+  body::before {
+    /* Your existing glowing overlay */
     content: '';
     position: fixed;
     top: 0; left: 0;
@@ -32,52 +40,57 @@ body::before {
     background-size: 400% 400%;
     animation: bgGlow 10s ease-in-out infinite;
     z-index: -2;
-}
+  }
 
 /* Navigation Styles */
 header {
-    background: #333;
-    padding: 1rem;
+    background-color: rgba(34, 34, 34, 0.9); /* Semi-transparent dark background */
+    padding: 1rem 0;
     position: sticky;
     top: 0;
     width: 100%;
     z-index: 10;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* More noticeable shadow */
 }
 
 nav ul {
     list-style: none;
     display: flex;
-    justify-content: flex-end;
-    padding-right: 2rem;
+    justify-content: center;
+    padding: 0 2rem;
+    margin: 0;
 }
 
 nav ul li {
-    margin-left: 1.5rem;
+    margin: 0 1.5rem;
 }
 
 nav ul li a {
-    color: #fff;
+    color: #f0f0f0; /* Slightly lighter text */
     text-decoration: none;
-    font-size: 1.2rem;
-    position: relative;
+    font-size: 1.1rem;
+    transition: color 0.3s ease, transform 0.3s ease; /* Added transform to transition */
+}
+
+nav ul li a:hover {
+    color: #00ffff;
+    transform: scale(1.05); /* Subtle scale on hover */
 }
 
 nav ul li a::after {
     content: '';
     position: absolute;
-    left: 0;
-    bottom: -5px;
+    left: 50%;
+    bottom: -3px;
     width: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #00ffff, #ff00ff, #00ffff);
-    box-shadow: 0 0 4px #00ffff;
-    border-radius: 2px;
-    transition: width 0.5s ease, box-shadow 0.5s ease;
+    height: 2px;
+    background: #00ffff;
+    transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
 }
 
 nav ul li a:hover::after {
     width: 100%;
-    box-shadow: 0 0 8px #ff00ff, 0 0 14px #00ffff;
+    left: 0;
 }
 
 /* Sections & Animations */
@@ -96,30 +109,88 @@ section.visible {
 }
 
 h2 {
+    font-size: 2.2em;
+    font-weight: bold;
+    color: #e0f7fa; /* Light cyan */
     text-align: center;
-    color: #4CAF50;
-    margin-bottom: 1rem;
+    margin-bottom: 1.2em;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-bottom: 3px solid #00bcd4; /* Cyan underline */
+    padding-bottom: 0.4em;
+  }
+/* Skill Section */
+#skills {
+    padding: 4rem 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    text-align: center;
 }
 
-/* Skill Section */
-.skill-container {
+#skills.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.skillset-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjust minmax for desired box width */
+    gap: 2rem; /* Adjust gap between skill categories */
+}
+
+.skill-category {
+    background-color: #222; /* Dark background for the boxes */
+    color: #eee;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.skill-category h3 {
+    color: #4CAF50; /* Highlight color for category titles */
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+    border-bottom: 1px solid #444; /* Subtle separator */
+    padding-bottom: 0.5rem;
+}
+
+.skill-icons {
     display: flex;
-    justify-content: center;
-    gap: 2rem;
     flex-wrap: wrap;
+    gap: 1rem; /* Adjust gap between skill icons */
+    justify-content: flex-start; /* Align icons to the left */
 }
 
 .skill {
-    background: #4CAF50;
-    padding: 1rem 2rem;
-    border-radius: 25px;
-    transition: transform 0.3s;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #333; /* Slightly lighter background for individual skills */
+    padding: 0.75rem;
+    border-radius: 6px;
+    width: 80px; /* Adjust icon box width */
+    height: 80px; /* Adjust icon box height */
+    justify-content: center;
+    transition: transform 0.3s ease;
 }
 
 .skill:hover {
     transform: scale(1.1);
-    cursor: pointer;
+}
+
+.skill img {
+    width: 40px; /* Adjust icon size */
+    height: 40px; /* Adjust icon size */
+    margin-bottom: 0.5rem;
+}
+
+.skill span {
+    color: #ccc;
+    font-size: 0.8rem;
+    text-align: center;
 }
 
 /* Projects */
@@ -336,58 +407,6 @@ html {
     box-shadow: 0 0 14px #ff00ff, 0 0 22px #00ffff;
     color: white;
 }
-/* Skill Section */
-.skill-container {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-    margin-top: 2rem;
-}
-
-.skill {
-    background: #4CAF50;
-    padding: 1rem 2rem;
-    border-radius: 25px;
-    transition: transform 0.3s;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    max-width: 150px; /* Limit width */
-}
-
-.skill:hover {
-    transform: scale(1.1);
-    cursor: pointer;
-}
-
-.skill img, .skill i {
-    width: 50px; /* Default size */
-    height: 50px;
-}
-
-/* Specific Skill Icon Sizes */
-.skill.python img {
-    width: 40px;
-    height: 40px;
-}
-
-.skill.cpp img {
-    width: 40px;
-    height: 40px;
-}
-
-.skill.data-visualization i, .skill.ml i {
-    font-size: 40px; /* Reduce font size for icons */
-}
-
-.skill-name {
-    font-size: 1.2rem;
-    color: #fff;
-    font-weight: bold;
-}
 .cert-block {
     display: flex;
     flex-direction: column;
@@ -397,119 +416,54 @@ html {
     padding: 1.5rem;
     margin-bottom: 2.5rem;
     box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
-  }
-  
-  .cert-text {
+}
+
+.cert-text {
     max-width: 700px;
     text-align: center;
     margin-bottom: 1.5rem;
-  }
-  
-  .cert-text h3 {
+}
+
+.cert-text h3 {
     color: #00ffff;
     margin-bottom: 0.8rem;
-  }
-  
-  .cert-text p {
+}
+
+.cert-text p {
     color: #ccc;
     font-size: 1rem;
     line-height: 1.6;
-  }
-  
-  .cert-img img {
+}
+
+.cert-img img {
     width: 100%;
     max-width: 500px;
     border-radius: 8px;
     border: 1px solid #444;
     box-shadow: 0 0 10px rgba(0, 255, 255, 0.15);
-  }
-  .project-images-small {
+}
+.project-images-small {
     display: flex;
     justify-content: center;
     gap: 1rem;
     margin-top: 1rem;
-  }
-  
-  .project-images-small img {
-    width: 370px;    /* smaller fixed width */
+}
+
+.project-images-small img {
+    width: 370px;     /* smaller fixed width */
     height: auto;
     border-radius: 6px;
     object-fit: cover;
     box-shadow: 0 0 6px rgba(0,255,255,0.2);
-  }
-  .project-images-large img {
-    width: 550px;   /* Increase as needed */
+}
+.project-images-large img {
+    width: 550px;     /* Increase as needed */
     height: auto;
     margin: 10px;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
-/* Blog Section Styling */
-#blog {
-    background-color: #1a1a1a; /* Dark background */
-    padding: 40px 20px;
-    color: white;
-    margin-top: 40px;
-    border-radius: 10px;
-}
 
-#blog h2 {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 30px;
-    color: #00e6e6;
-}
-
-.blog-post {
-    background-color: #333;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-}
-
-.blog-post h3 {
-    color: #00e6e6;
-    font-size: 1.8rem;
-    margin-bottom: 10px;
-}
-
-.blog-post ul {
-    list-style-type: none;
-    padding-left: 0;
-    margin-bottom: 15px;
-}
-
-.blog-post li {
-    font-size: 1.1rem;
-    margin-bottom: 10px;
-    color: #ccc;
-}
-
-.blog-post p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: #ccc;
-}
-
-.blog-post h3::before {
-    content: "📝";
-    margin-right: 10px;
-    font-size: 1.8rem;
-}
-
-.blog-post ul li strong {
-    color: #00e6e6;
-}
-
-.blog-post p a {
-    color: #00e6e6;
-    text-decoration: none;
-}
-
-.blog-post p a:hover {
-    text-decoration: underline;
-}
 /* Experience Section Styling */
 #experience {
     background-color: #1a1a1a; /* Dark background */
@@ -532,45 +486,55 @@ html {
     border-radius: 10px;
     margin-bottom: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    display: flex; /* Enable flexbox for logo and text alignment */
+    justify-content: space-between; /* Push logo to the right */
+    align-items: center; /* Vertically align logo and text */
 }
 
-.experience-item h3 {
+.experience-details {
+    flex-grow: 1; /* Allow details to take remaining space */
+}
+
+.experience-details h3 {
     color: #00e6e6;
     font-size: 1.8rem;
+    margin-bottom: 5px; /* Reduced margin for better spacing */
+}
+
+.experience-details p.date {
+    font-size: 1rem;
+    color: #ccc;
     margin-bottom: 10px;
 }
 
-.experience-item p {
-    font-size: 1.1rem;
-    line-height: 1.6;
+.experience-details ul {
+    padding-left: 20px;
+    margin-bottom: 10px;
+}
+
+.experience-details ul li {
+    font-size: 1rem;
     color: #ccc;
+    line-height: 1.5;
 }
 
-.experience-item h3::before {
-    content: "💼";
-    margin-right: 10px;
-    font-size: 1.8rem;
-}
-
-.experience-item p strong {
+.experience-details h3 span {
     color: #00e6e6;
 }
 
-.experience-item p a {
-    color: #00e6e6;
-    text-decoration: none;
+.experience-logo {
+    width: 120px; /* Even bigger logo width */
+    height: 120px; /* Even bigger logo height */
+    margin-left: 20px; /* More space between text and logo */
+    border-radius: 50%; /* Make the logo container circular */
+    overflow: hidden; /* Clip any overflowing image to the circle */
+    flex-shrink: 0; /* Prevent logo from shrinking if space is tight */
 }
 
-.experience-item p a:hover {
-    text-decoration: underline;
-}
-#contact {
-    background-color: #1a1a1a;
-    color: white;
-    padding: 40px 20px;
-    margin-top: 40px;
-    border-radius: 10px;
-    text-align: center;
+.experience-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Or 'cover' depending on your logo */
 }
 
 #contact h2 {
@@ -585,8 +549,7 @@ html {
     color: #ccc;
 }
 
-#contact a {
-    color: #00e6e6;
+#contact a {color: #00e6e6;
     text-decoration: none;
 }
 
@@ -630,6 +593,167 @@ form button {
 form button:hover {
     background-color: #00b8b8;
 }
+.photo-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 1rem 2rem;
+    background: radial-gradient(circle, #2c2c2c, #1a1a1a); /* Nicer dark radial gradient */
+}
 
+.photo-container {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid #00ffe7;
+    box-shadow: 0 0 30px rgba(0, 255, 231, 0.6);
+}
 
+.profile-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    object-position: center;
+    transition: transform 0.3s ease;
+}
+
+.profile-photo:hover {
+    transform: scale(1.05);
+}
+
+/* Updated Skill Section to match the image */
+#skills {
+    padding: 4rem 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    text-align: center;
+}
+
+#skills.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#skills h2 {
+    color: #00ffff; /* Updated heading color */
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+
+.skillset-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.skill-category {
+    text-align: center;
+}
+
+.skill-category h3 {
+    color: #4CAF50; /* Updated category heading color */
+    margin-bottom: 1rem;
+    font-size: 1.6rem;
+}
+
+.skill-icons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.skill {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #2c2c2c; /* Darker skill block background */
+    padding: 1rem;
+    border-radius: 8px;
+    width: 80px; /* Adjust icon block size */
+    height: 80px; /* Adjust icon block size */
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.skill:hover {
+    transform: scale(1.1);
+}
+
+.skill img {
+    width: 40px; /* Adjust icon size */
+    height: 40px; /* Adjust icon size */
+    margin-bottom: 0.5rem;
+}
+
+.skill span {
+    color: #ccc;
+    font-size: 0.8rem;
+    text-align: center;
+}
+/* Adjust the main container to use Flexbox */
+#about {
+    display: flex;
+    align-items: center; /* Vertically align the text and image */
+    justify-content: space-around; /* Distribute space between them */
+    padding: 4rem 2rem; /* Adjust padding as needed */
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Style the text content */
+#about .content {
+    text-align: left; /* Align text to the left */
+    max-width: 50%; /* Adjust the width of the text area */
+}
+
+#about .content h2 {
+    text-align: left; /* Keep the heading aligned to the left within its container */
+    margin-bottom: 1rem; /* Adjust spacing */
+}
+
+#about .content p {
+    font-size: 1rem; /* Adjust font size */
+    color: #ccc; /* Keep your text color */
+    line-height: 1.6;
+}
+.about-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 20px;
+    text-align: center;
+  }
+  
+  .about-image img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 5px solid cyan;
+    box-shadow: 0 0 15px cyan;
+    object-fit: cover;
+    margin-bottom: 30px;
+  }
+  
+  .about-text {
+    max-width: 800px;
+    color: white;
+  }
+  
+  .about-text h2 {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+  }
+  
+  .about-text hr {
+    width: 80px;
+    border: 2px solid cyan;
+    margin: 0 auto 20px;
+  }
   
