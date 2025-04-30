@@ -46,10 +46,11 @@ body {
 header {
     background-color: rgba(34, 34, 34, 0.9); /* Semi-transparent dark background */
     padding: 1rem 0;
-    position: sticky;
+    position: fixed; /* Make it fixed to the viewport */
     top: 0;
-    width: 100%;
-    z-index: 10;
+    left: 0; /* Ensure it starts from the left edge */
+    width: 100%; /* Ensure it spans the entire width */
+    z-index: 100; /* Ensure it's above other content */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* More noticeable shadow */
 }
 
@@ -92,7 +93,6 @@ nav ul li a:hover::after {
     width: 100%;
     left: 0;
 }
-
 /* Sections & Animations */
 section {
     padding: 4rem 1rem;
@@ -281,8 +281,10 @@ html {
 .hero-content h1 {
     font-size: 3rem;
     color: #ffffff;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem; /* reduce space below */
+    margin-top: -23rem;     /* pull it closer to the top (profile pic) */
 }
+
 
 .glow-name {
     color: #00ffff;
@@ -704,7 +706,7 @@ form button:hover {
     justify-content: space-around; /* Distribute space between them */
     padding: 4rem 2rem; /* Adjust padding as needed */
     max-width: 1200px;
-    margin: 0 auto;
+    margin: auto;
 }
 
 /* Style the text content */
@@ -757,3 +759,55 @@ form button:hover {
     margin: 0 auto 20px;
   }
   
+  #education {
+    padding: 4rem 1rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+#education.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.education-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.education-block {
+    background-color: #2c2c2c;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0, 255, 255, 0.15);
+    color: #ccc;
+}
+
+.education-block h3 {
+    color: #00ffff;
+    margin-bottom: 0.5rem;
+}
+
+.education-block p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+.cert-img p {
+    margin-top: 0.5rem; /* Add some space between the image and the link */
+    text-align: center; /* Center the link */
+}
+
+.cert-img p a {
+    color: #00ffff; /* Style the link color */
+    text-decoration: underline; /* Add underline */
+    font-size: 0.9rem;  /* Adjust font size*/
+}
+
+.cert-img p a:hover {
+    text-decoration: none; /* Remove underline on hover */
+}
